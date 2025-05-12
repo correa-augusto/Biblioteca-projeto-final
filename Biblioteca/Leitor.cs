@@ -46,7 +46,7 @@ namespace Biblioteca
             Tipo = tipo;
         }
 
-        // Métodos de ação
+ 
         public bool EmprestaItem(Exemplar exemplar, Leitor destino)
         {
             if (!exemplaresLeitor.Contains(exemplar)) return false;
@@ -86,6 +86,7 @@ namespace Biblioteca
         }
 
         // ToString
+
         public override string ToString()
         {
             return $"Nome: {Nome}\nNascimento: {Nascimento.ToShortDateString()}\nCPF: {Cpf}\nEmail: {Email}\nTelefone: {Telefone}\nTipo: {Tipo}\nExemplares: {ExemplaresLeitor.Count}\nEmpréstimos: {EmprestimosLeitor.Count}";
