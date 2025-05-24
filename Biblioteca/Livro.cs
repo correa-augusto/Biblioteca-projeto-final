@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
     internal class Livro:Exemplar
@@ -32,13 +33,12 @@ namespace Biblioteca
             get => tipoCapa;
             set
             {
-                if (!string.Equals(value, "mole", StringComparison.OrdinalIgnoreCase) &&
-                    !string.Equals(value, "dura", StringComparison.OrdinalIgnoreCase))
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Tipo de capa deve ser 'mole' ou 'dura'.");
+                    throw new Exception("Tipo de capa deve ser preenchido.");
                 }
 
-                tipoCapa = value.Trim().ToLower(); 
+                tipoCapa = value.Trim();
             }
         }
 

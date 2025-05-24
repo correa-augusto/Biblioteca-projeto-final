@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
     internal static class Program
@@ -10,7 +11,7 @@ namespace Biblioteca
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PessoaForm()); // ← Substitua por seu formulário principal, se tiver outro nome
+            Application.Run(new BibliotecaForm()); // ← Substitua por seu formulário principal, se tiver outro nome
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
     internal class Revista:Exemplar

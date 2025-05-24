@@ -4,22 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
-    internal class Funcionario : Pessoa
+    public class Funcionario : Pessoa
     {
         private int cargo;
         private decimal salario;
         private int cargaHoraria;
         private string funcao;
-
         public int Cargo
         {
             get => cargo;
             set
             {
                 if (value < 0)
+                {
                     throw new Exception("O cargo deve ser um número positivo.");
+                }
                 cargo = value;
             }
         }
@@ -30,7 +32,9 @@ namespace Biblioteca
             set
             {
                 if (value < 0)
+                {
                     throw new Exception("O salário deve ser um valor positivo.");
+                }
                 salario = value;
             }
         }
@@ -41,7 +45,10 @@ namespace Biblioteca
             set
             {
                 if (value <= 0)
+                {
                     throw new Exception("A carga horária deve ser maior que zero.");
+                }
+                    
                 cargaHoraria = value;
             }
         }
@@ -52,7 +59,9 @@ namespace Biblioteca
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new Exception("A função deve ser informada.");
+                {
+                   throw new Exception("A função deve ser informada.");
+                }
                 funcao = value;
             }
         }
@@ -60,7 +69,9 @@ namespace Biblioteca
         public void NovoLeitor(Leitor leitor)
         {
             if (leitor == null)
-                throw new Exception("Leitor inválido.");
+            {
+               throw new Exception("Leitor inválido.");
+            }
             Console.WriteLine("Leitor adicionado com sucesso.");
         }
 
@@ -169,6 +180,20 @@ namespace Biblioteca
             if (exemplar == null || leitor == null)
                 throw new Exception("Dados inválidos.");
             Console.WriteLine($"Exemplar: {exemplar}, Leitor: {leitor}");
+        }
+
+        public Funcionario(string nome, DateTime nascimento, string cpf, string email, string telefone,
+                   int cargo, string funcao, decimal salario, int cargaHoraria)
+        {
+            Nome = nome;
+            Nascimento = nascimento;
+            Cpf = cpf;
+            Email = email;
+            Telefone = telefone;
+            Cargo = cargo;
+            Funcao = funcao;
+            Salario = salario;
+            CargaHoraria = cargaHoraria;
         }
 
         public override string ToString()

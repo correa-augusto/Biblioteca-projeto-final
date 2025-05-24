@@ -1,4 +1,5 @@
 ﻿namespace Biblioteca
+
 {
     partial class ExemplarForm
     {
@@ -58,7 +59,7 @@
             LabelCapa = new Label();
             ComboBoxCapa = new ComboBox();
             LabeNumPag = new Label();
-            numericUpDown1 = new NumericUpDown();
+            numericUpDownPaginasLivro = new NumericUpDown();
             TabRevista = new TabPage();
             LabelPaginas = new Label();
             NumericNumPaginas = new NumericUpDown();
@@ -78,7 +79,7 @@
             TabLivro.SuspendLayout();
             GroupBoxEbook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumericTam).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPaginasLivro).BeginInit();
             TabRevista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumericNumPaginas).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumericEdicao).BeginInit();
@@ -186,6 +187,7 @@
             // NumericUpDownAno
             // 
             NumericUpDownAno.Location = new Point(21, 328);
+            NumericUpDownAno.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             NumericUpDownAno.Name = "NumericUpDownAno";
             NumericUpDownAno.Size = new Size(120, 23);
             NumericUpDownAno.TabIndex = 5;
@@ -248,7 +250,7 @@
             TabLivro.Controls.Add(LabelCapa);
             TabLivro.Controls.Add(ComboBoxCapa);
             TabLivro.Controls.Add(LabeNumPag);
-            TabLivro.Controls.Add(numericUpDown1);
+            TabLivro.Controls.Add(numericUpDownPaginasLivro);
             TabLivro.Location = new Point(4, 24);
             TabLivro.Name = "TabLivro";
             TabLivro.Padding = new Padding(3);
@@ -300,6 +302,7 @@
             // NumericTam
             // 
             NumericTam.Location = new Point(16, 100);
+            NumericTam.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
             NumericTam.Name = "NumericTam";
             NumericTam.Size = new Size(120, 23);
             NumericTam.TabIndex = 2;
@@ -377,12 +380,13 @@
             LabeNumPag.Text = "Paginas";
             LabeNumPag.TextAlign = ContentAlignment.TopCenter;
             // 
-            // numericUpDown1
+            // numericUpDownPaginasLivro
             // 
-            numericUpDown1.Location = new Point(25, 52);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(95, 23);
-            numericUpDown1.TabIndex = 0;
+            numericUpDownPaginasLivro.Location = new Point(25, 52);
+            numericUpDownPaginasLivro.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            numericUpDownPaginasLivro.Name = "numericUpDownPaginasLivro";
+            numericUpDownPaginasLivro.Size = new Size(95, 23);
+            numericUpDownPaginasLivro.TabIndex = 0;
             // 
             // TabRevista
             // 
@@ -411,6 +415,7 @@
             // NumericNumPaginas
             // 
             NumericNumPaginas.Location = new Point(41, 122);
+            NumericNumPaginas.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             NumericNumPaginas.Name = "NumericNumPaginas";
             NumericNumPaginas.Size = new Size(120, 23);
             NumericNumPaginas.TabIndex = 2;
@@ -507,6 +512,7 @@
             ButtonSalvar.TabIndex = 2;
             ButtonSalvar.Text = "Salvar";
             ButtonSalvar.UseVisualStyleBackColor = false;
+            ButtonSalvar.Click += ButtonSalvar_Click;
             // 
             // ExemplarForm
             // 
@@ -529,7 +535,7 @@
             GroupBoxEbook.ResumeLayout(false);
             GroupBoxEbook.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumericTam).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPaginasLivro).EndInit();
             TabRevista.ResumeLayout(false);
             TabRevista.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)NumericNumPaginas).EndInit();
@@ -564,19 +570,11 @@
         private TabPage TabHq;
         private TabPage TabGenerico;
         private Label LabeNumPag;
-        private NumericUpDown numericUpDown1;
-        private CheckBox CheckBoxEbook;
+        private NumericUpDown numericUpDownPaginasLivro;
         private Label LabelIsbn;
         private TextBox TextBoxIsbn;
         private Label LabelCapa;
         private ComboBox ComboBoxCapa;
-        private GroupBox GroupBoxEbook;
-        private Label LabekTamanho;
-        private NumericUpDown NumericTam;
-        private Label LabelFormato;
-        private ComboBox ComboBoxFormato;
-        private Label LabelUrl;
-        private TextBox TextBoxUrl;
         private Label LabelEdicao;
         private NumericUpDown NumericEdicao;
         private Label LabelPaginas;
@@ -587,5 +585,13 @@
         private Label LabelNumEdicao;
         private ListBox ListBoxGenerico;
         private Button ButtonSalvar;
+        private GroupBox GroupBoxEbook;
+        private Label LabelUrl;
+        private TextBox TextBoxUrl;
+        private Label LabekTamanho;
+        private NumericUpDown NumericTam;
+        private Label LabelFormato;
+        private ComboBox ComboBoxFormato;
+        private CheckBox CheckBoxEbook;
     }
 }

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
     internal class ClassEnum
@@ -14,13 +15,13 @@ namespace Biblioteca
         public enum EnumFuncionarioCargo
         {
             [Description("Gerente")]
-            Gerente = 1,
+            Gerente = 0,
             [Description("Atendente")]
-            Atendente = 2,
+            Atendente = 1,
             [Description("Caixa")]
-            Caixa = 3,
+            Caixa = 2,
             [Description("Estagiário")]
-            Estagiário = 4,
+            Estagiário = 3,
         }
 
         public enum EnumExemplarStatus

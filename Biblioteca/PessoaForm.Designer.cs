@@ -40,8 +40,8 @@
             LabelNome = new Label();
             TextBoxNome = new TextBox();
             TabFuncionario = new TabPage();
-            LabelFuncao = new Label();
             TextBoxFuncao = new TextBox();
+            LabelFuncao = new Label();
             LabelCarga = new Label();
             NumericCarga = new NumericUpDown();
             LabelSalario = new Label();
@@ -50,15 +50,15 @@
             ComboBoxCargo = new ComboBox();
             TabLeitor = new TabPage();
             LabelTipo = new Label();
-            ListBoxTipo = new ListBox();
-            LeitorTab = new TabControl();
+            ListBoxTipoLeitor = new ListBox();
+            PessoaTab = new TabControl();
             ButtonSalvar = new Button();
             PessoaGroup.SuspendLayout();
             TabFuncionario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumericCarga).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumericSalario).BeginInit();
             TabLeitor.SuspendLayout();
-            LeitorTab.SuspendLayout();
+            PessoaTab.SuspendLayout();
             SuspendLayout();
             // 
             // PessoaGroup
@@ -127,7 +127,7 @@
             // MaskedCpf
             // 
             MaskedCpf.Location = new Point(19, 192);
-            MaskedCpf.Mask = "000.000.00-00";
+            MaskedCpf.Mask = "000.000.000-00";
             MaskedCpf.Name = "MaskedCpf";
             MaskedCpf.Size = new Size(139, 23);
             MaskedCpf.TabIndex = 4;
@@ -169,8 +169,8 @@
             // 
             // TabFuncionario
             // 
-            TabFuncionario.Controls.Add(LabelFuncao);
             TabFuncionario.Controls.Add(TextBoxFuncao);
+            TabFuncionario.Controls.Add(LabelFuncao);
             TabFuncionario.Controls.Add(LabelCarga);
             TabFuncionario.Controls.Add(NumericCarga);
             TabFuncionario.Controls.Add(LabelSalario);
@@ -185,6 +185,13 @@
             TabFuncionario.Text = "Funcionario";
             TabFuncionario.UseVisualStyleBackColor = true;
             // 
+            // TextBoxFuncao
+            // 
+            TextBoxFuncao.Location = new Point(48, 264);
+            TextBoxFuncao.Name = "TextBoxFuncao";
+            TextBoxFuncao.Size = new Size(351, 23);
+            TextBoxFuncao.TabIndex = 8;
+            // 
             // LabelFuncao
             // 
             LabelFuncao.AutoSize = true;
@@ -193,13 +200,6 @@
             LabelFuncao.Size = new Size(46, 15);
             LabelFuncao.TabIndex = 7;
             LabelFuncao.Text = "Função";
-            // 
-            // TextBoxFuncao
-            // 
-            TextBoxFuncao.Location = new Point(49, 253);
-            TextBoxFuncao.Name = "TextBoxFuncao";
-            TextBoxFuncao.Size = new Size(456, 23);
-            TextBoxFuncao.TabIndex = 6;
             // 
             // LabelCarga
             // 
@@ -229,6 +229,7 @@
             // NumericSalario
             // 
             NumericSalario.Location = new Point(49, 129);
+            NumericSalario.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
             NumericSalario.Name = "NumericSalario";
             NumericSalario.Size = new Size(120, 23);
             NumericSalario.TabIndex = 2;
@@ -254,7 +255,7 @@
             // TabLeitor
             // 
             TabLeitor.Controls.Add(LabelTipo);
-            TabLeitor.Controls.Add(ListBoxTipo);
+            TabLeitor.Controls.Add(ListBoxTipoLeitor);
             TabLeitor.Location = new Point(4, 24);
             TabLeitor.Name = "TabLeitor";
             TabLeitor.Padding = new Padding(3);
@@ -272,26 +273,26 @@
             LabelTipo.TabIndex = 1;
             LabelTipo.Text = "Tipo";
             // 
-            // ListBoxTipo
+            // ListBoxTipoLeitor
             // 
-            ListBoxTipo.FormattingEnabled = true;
-            ListBoxTipo.Items.AddRange(new object[] { "Leitor Casual", "Leitor Ávido", "Leitor de Ficção", "Leitor de não Ficção", "Leitor Critico", "Leitor de Best-Sellers", "Leitor de Classicos", "Leitor de Gênero Específico ", "Leitor Âcademico", "Leitor Digital", "Leitor Tradicional", "Leitor de Livros De Bolso", "Leitor multitarefas", "Outros" });
-            ListBoxTipo.Location = new Point(31, 48);
-            ListBoxTipo.Name = "ListBoxTipo";
-            ListBoxTipo.Size = new Size(496, 244);
-            ListBoxTipo.TabIndex = 0;
-            ListBoxTipo.SelectedIndexChanged += ListBoxTipo_SelectedIndexChanged;
+            ListBoxTipoLeitor.FormattingEnabled = true;
+            ListBoxTipoLeitor.Items.AddRange(new object[] { "Leitor Casual", "Leitor Ávido", "Leitor de Ficção", "Leitor de não Ficção", "Leitor Critico", "Leitor de Best-Sellers", "Leitor de Classicos", "Leitor de Gênero Específico ", "Leitor Âcademico", "Leitor Digital", "Leitor Tradicional", "Leitor de Livros De Bolso", "Leitor multitarefas", "Outros" });
+            ListBoxTipoLeitor.Location = new Point(31, 48);
+            ListBoxTipoLeitor.Name = "ListBoxTipoLeitor";
+            ListBoxTipoLeitor.Size = new Size(496, 244);
+            ListBoxTipoLeitor.TabIndex = 0;
+            ListBoxTipoLeitor.SelectedIndexChanged += ListBoxTipo_SelectedIndexChanged;
             // 
-            // LeitorTab
+            // PessoaTab
             // 
-            LeitorTab.Controls.Add(TabLeitor);
-            LeitorTab.Controls.Add(TabFuncionario);
-            LeitorTab.Location = new Point(747, 38);
-            LeitorTab.Name = "LeitorTab";
-            LeitorTab.SelectedIndex = 0;
-            LeitorTab.Size = new Size(560, 418);
-            LeitorTab.TabIndex = 1;
-            LeitorTab.Tag = "";
+            PessoaTab.Controls.Add(TabLeitor);
+            PessoaTab.Controls.Add(TabFuncionario);
+            PessoaTab.Location = new Point(747, 38);
+            PessoaTab.Name = "PessoaTab";
+            PessoaTab.SelectedIndex = 0;
+            PessoaTab.Size = new Size(560, 418);
+            PessoaTab.TabIndex = 1;
+            PessoaTab.Tag = "";
             // 
             // ButtonSalvar
             // 
@@ -302,6 +303,7 @@
             ButtonSalvar.TabIndex = 2;
             ButtonSalvar.Text = "Salvar";
             ButtonSalvar.UseVisualStyleBackColor = false;
+            ButtonSalvar.Click += ButtonSalvar_Click;
             // 
             // PessoaForm
             // 
@@ -310,7 +312,7 @@
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(1411, 545);
             Controls.Add(ButtonSalvar);
-            Controls.Add(LeitorTab);
+            Controls.Add(PessoaTab);
             Controls.Add(PessoaGroup);
             Name = "PessoaForm";
             Text = "Pessoa";
@@ -323,7 +325,7 @@
             ((System.ComponentModel.ISupportInitialize)NumericSalario).EndInit();
             TabLeitor.ResumeLayout(false);
             TabLeitor.PerformLayout();
-            LeitorTab.ResumeLayout(false);
+            PessoaTab.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -342,17 +344,17 @@
         private TextBox TextBoxEmail;
         private TabPage TabFuncionario;
         private TabPage TabLeitor;
-        private TabControl LeitorTab;
+        private TabControl PessoaTab;
         private Label LabelTipo;
-        private ListBox ListBoxTipo;
+        private ListBox ListBoxTipoLeitor;
         private Label LabelCargo;
         private ComboBox ComboBoxCargo;
         private NumericUpDown NumericSalario;
         internal Label LabelSalario;
         private Label LabelFuncao;
-        private TextBox TextBoxFuncao;
         private Label LabelCarga;
         private NumericUpDown NumericCarga;
         private Button ButtonSalvar;
+        private TextBox TextBoxFuncao;
     }
 }

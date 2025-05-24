@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
-    internal class Emprestimo
+    public class Emprestimo
     {
         private Leitor origem;
         private Leitor destino;

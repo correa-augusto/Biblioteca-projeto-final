@@ -5,9 +5,10 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
-    internal abstract class Pessoa
+    public abstract class Pessoa
     {
         private string nome;
         private DateTime nascimento;
@@ -21,7 +22,10 @@ namespace Biblioteca
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new Exception("Nome deve ser preenchido.");
+                }
+                    
                 nome = value.Trim();
             }
         }
@@ -38,7 +42,9 @@ namespace Biblioteca
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new Exception("CPF deve ser preenchido.");
+                }
                 cpf = value.Trim();
             }
         }
@@ -49,7 +55,9 @@ namespace Biblioteca
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new Exception("Email deve ser preenchido.");
+                }
                 email = value.Trim();
             }
         }
@@ -60,7 +68,10 @@ namespace Biblioteca
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new Exception("Telefone deve ser preenchido.");
+                }
+                    
                 telefone = value.Trim();
             }
         }

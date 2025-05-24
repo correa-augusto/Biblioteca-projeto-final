@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
 {
-    internal class Leitor : Pessoa
+    public class Leitor : Pessoa
     {
         private List<Exemplar> exemplaresLeitor = new List<Exemplar>();
         private List<Emprestimo> emprestimosLeitor = new List<Emprestimo>();
