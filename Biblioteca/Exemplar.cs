@@ -105,11 +105,7 @@ namespace Biblioteca
             get => status;
             set
             {
-                if(value > 0)
-                {
-                    status = value;
-                }
-                throw new Exception("Status deve ser maior que zero");
+                status = value;
             }
         }
 

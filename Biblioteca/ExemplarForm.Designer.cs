@@ -73,6 +73,8 @@
             TabGenerico = new TabPage();
             ListBoxGenerico = new ListBox();
             ButtonSalvar = new Button();
+            buttonEditar = new Button();
+            buttonExcluir = new Button();
             GroupBoxExemplar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumericUpDownAno).BeginInit();
             tabControlExemplar.SuspendLayout();
@@ -110,6 +112,7 @@
             GroupBoxExemplar.TabIndex = 0;
             GroupBoxExemplar.TabStop = false;
             GroupBoxExemplar.Text = "Exemplar";
+            GroupBoxExemplar.Enter += GroupBoxExemplar_Enter;
             // 
             // LabelSubtitulo
             // 
@@ -240,6 +243,7 @@
             tabControlExemplar.SelectedIndex = 0;
             tabControlExemplar.Size = new Size(464, 521);
             tabControlExemplar.TabIndex = 1;
+            tabControlExemplar.Selecting += tabControlExemplar_Selecting;
             // 
             // TabLivro
             // 
@@ -508,17 +512,41 @@
             ButtonSalvar.BackColor = SystemColors.ActiveCaption;
             ButtonSalvar.Location = new Point(26, 612);
             ButtonSalvar.Name = "ButtonSalvar";
-            ButtonSalvar.Size = new Size(1240, 48);
+            ButtonSalvar.Size = new Size(384, 48);
             ButtonSalvar.TabIndex = 2;
             ButtonSalvar.Text = "Salvar";
             ButtonSalvar.UseVisualStyleBackColor = false;
             ButtonSalvar.Click += ButtonSalvar_Click;
+            // 
+            // buttonEditar
+            // 
+            buttonEditar.BackColor = Color.Lime;
+            buttonEditar.Location = new Point(416, 612);
+            buttonEditar.Name = "buttonEditar";
+            buttonEditar.Size = new Size(376, 48);
+            buttonEditar.TabIndex = 3;
+            buttonEditar.Text = "Editar";
+            buttonEditar.UseVisualStyleBackColor = false;
+            buttonEditar.Click += buttonEditar_Click;
+            // 
+            // buttonExcluir
+            // 
+            buttonExcluir.BackColor = Color.Red;
+            buttonExcluir.Location = new Point(812, 612);
+            buttonExcluir.Name = "buttonExcluir";
+            buttonExcluir.Size = new Size(376, 48);
+            buttonExcluir.TabIndex = 4;
+            buttonExcluir.Text = "Excluir";
+            buttonExcluir.UseVisualStyleBackColor = false;
+            buttonExcluir.Click += buttonExcluir_Click;
             // 
             // ExemplarForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1278, 698);
+            Controls.Add(buttonExcluir);
+            Controls.Add(buttonEditar);
             Controls.Add(ButtonSalvar);
             Controls.Add(tabControlExemplar);
             Controls.Add(GroupBoxExemplar);
@@ -593,5 +621,7 @@
         private Label LabelFormato;
         private ComboBox ComboBoxFormato;
         private CheckBox CheckBoxEbook;
+        private Button buttonEditar;
+        private Button buttonExcluir;
     }
 }

@@ -13,6 +13,7 @@ namespace Biblioteca
         private string formato;
         private decimal tamanho;
         private string url;
+        private int paginas;
 
         public String Formato
         {
@@ -53,12 +54,26 @@ namespace Biblioteca
             }
         }
 
+        public int Pagninas
+        {
+            get => paginas;
+            set
+            {
+                if (value < 20)
+                {
+                    throw new Exception("O livro deve conter mais de 20 páginas");
+                }
+                paginas = value;
+            }
+        }
+
         public Ebook(string titulo, string subtitulo, string escritor, string editora, int anoPublicacao,
-             string genero, int status, string formato, decimal tamanho, string url) : base(titulo, subtitulo, escritor, editora, anoPublicacao, genero, status)
+             string genero, int status, string formato, decimal tamanho, string url, int paginas) : base(titulo, subtitulo, escritor, editora, anoPublicacao, genero, status)
         {
             this.formato = formato; 
             this.tamanho = tamanho; 
             this.url = url;
+            this.paginas = paginas;
         }
 
         public override string ToString()
@@ -72,7 +87,8 @@ namespace Biblioteca
                    $"Status: {(Status == 1 ? "Disponível" : "Indisponível")}\n" +
                    $"Formato: {Formato}\n" +
                    $"Tamanho: {Tamanho} MB\n" +
-                   $"URL: {Url}";
+                   $"URL: {Url}" +
+                   $"PAGINAS: {Pagninas}";
         }
     }
 }

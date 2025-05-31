@@ -53,6 +53,8 @@
             ListBoxTipoLeitor = new ListBox();
             PessoaTab = new TabControl();
             ButtonSalvar = new Button();
+            buttonEditar = new Button();
+            buttonExcluir = new Button();
             PessoaGroup.SuspendLayout();
             TabFuncionario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)NumericCarga).BeginInit();
@@ -293,17 +295,41 @@
             PessoaTab.Size = new Size(560, 418);
             PessoaTab.TabIndex = 1;
             PessoaTab.Tag = "";
+            PessoaTab.Selecting += PessoaTab_Selecting;
+            PessoaTab.Selected += PessoaTab_Selected;
             // 
             // ButtonSalvar
             // 
             ButtonSalvar.BackColor = SystemColors.ActiveCaption;
             ButtonSalvar.Location = new Point(12, 491);
             ButtonSalvar.Name = "ButtonSalvar";
-            ButtonSalvar.Size = new Size(1323, 42);
+            ButtonSalvar.Size = new Size(450, 42);
             ButtonSalvar.TabIndex = 2;
             ButtonSalvar.Text = "Salvar";
             ButtonSalvar.UseVisualStyleBackColor = false;
             ButtonSalvar.Click += ButtonSalvar_Click;
+            // 
+            // buttonEditar
+            // 
+            buttonEditar.BackColor = Color.Lime;
+            buttonEditar.Location = new Point(468, 492);
+            buttonEditar.Name = "buttonEditar";
+            buttonEditar.Size = new Size(451, 40);
+            buttonEditar.TabIndex = 3;
+            buttonEditar.Text = "Editar";
+            buttonEditar.UseVisualStyleBackColor = false;
+            buttonEditar.Click += buttonEditar_Click;
+            // 
+            // buttonExcluir
+            // 
+            buttonExcluir.BackColor = Color.Red;
+            buttonExcluir.Location = new Point(925, 492);
+            buttonExcluir.Name = "buttonExcluir";
+            buttonExcluir.Size = new Size(432, 41);
+            buttonExcluir.TabIndex = 4;
+            buttonExcluir.Text = "Excluir";
+            buttonExcluir.UseVisualStyleBackColor = false;
+            buttonExcluir.Click += buttonExcluir_Click;
             // 
             // PessoaForm
             // 
@@ -311,6 +337,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(1411, 545);
+            Controls.Add(buttonExcluir);
+            Controls.Add(buttonEditar);
             Controls.Add(ButtonSalvar);
             Controls.Add(PessoaTab);
             Controls.Add(PessoaGroup);
@@ -356,5 +384,7 @@
         private NumericUpDown NumericCarga;
         private Button ButtonSalvar;
         private TextBox TextBoxFuncao;
+        private Button buttonEditar;
+        private Button buttonExcluir;
     }
 }

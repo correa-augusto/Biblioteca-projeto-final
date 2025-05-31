@@ -95,6 +95,9 @@
             DataViewFuncionario.Name = "DataViewFuncionario";
             DataViewFuncionario.Size = new Size(503, 213);
             DataViewFuncionario.TabIndex = 0;
+            DataViewFuncionario.CellContentClick += DataViewFuncionario_CellContentClick;
+            DataViewFuncionario.CellFormatting += DataViewFuncionario_CellFormatting;
+            DataViewFuncionario.DoubleClick += DataViewFuncionario_DoubleClick;
             // 
             // TabLeitores
             // 
@@ -114,6 +117,7 @@
             DataViewLeitores.Name = "DataViewLeitores";
             DataViewLeitores.Size = new Size(512, 164);
             DataViewLeitores.TabIndex = 0;
+            DataViewLeitores.DoubleClick += DataViewLeitores_DoubleClick;
             // 
             // TabExemplares
             // 
@@ -132,6 +136,7 @@
             DataViewExemplares.Name = "DataViewExemplares";
             DataViewExemplares.Size = new Size(512, 223);
             DataViewExemplares.TabIndex = 0;
+            DataViewExemplares.DoubleClick += DataViewExemplares_DoubleClick;
             // 
             // BibliotecaForm
             // 

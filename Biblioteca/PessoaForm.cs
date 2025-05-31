@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,12 +17,61 @@ namespace Biblioteca
     {
         List<Funcionario> funcionarios;
         List<Leitor> leitores;
+        Funcionario funcionario;
+        Leitor leitor;
+
+        private bool edicaoFuncionario = false;
+        private bool edicaoLeitor = false;
         public PessoaForm(List<Funcionario> funcionarios, List<Leitor> leitores)
         {
             InitializeComponent();
 
             this.funcionarios = funcionarios;
             this.leitores = leitores;
+        }
+
+        public PessoaForm(List<Funcionario> funcionarios, Funcionario funcionario)
+        {
+            InitializeComponent();
+            edicaoFuncionario = true;
+            // atribui o objeto recebido à variável com escopo de classe
+            this.funcionario = funcionario;
+            this.funcionarios = funcionarios;
+
+            // carrega os valores do Enum para o combobox
+            ComboBoxCargo.DataSource = Enum.GetValues(typeof(EnumFuncionarioCargo));
+            ComboBoxCargo.SelectedIndex = 0;
+
+            // carrega os valores do objeto recebido
+            TextBoxNome.Text = funcionario.Nome;
+            DateTimePickerNasc.Value = funcionario.Nascimento;
+            MaskedCpf.Text = funcionario.Cpf;
+            TextBoxEmail.Text = funcionario.Email;
+            MaskedTelefone.Text = funcionario.Telefone;
+            ComboBoxCargo.Text = "" + (EnumFuncionarioCargo)Enum.Parse(typeof(EnumFuncionarioCargo), funcionario.Cargo.ToString());
+            NumericSalario.Value = funcionario.Salario;
+            NumericCarga.Value = funcionario.CargaHoraria;
+            TextBoxFuncao.Text = funcionario.Funcao;
+            PessoaTab.SelectedIndex = 1;
+            PessoaTab.TabPages[0].Enabled = false;
+            ButtonSalvar.Enabled = false;
+        }
+
+        public PessoaForm(List<Leitor> leitores, Leitor leitor)
+        {
+            InitializeComponent();
+            edicaoLeitor = true;
+
+            this.leitor = leitor;
+            this.leitores = leitores;
+
+            TextBoxNome.Text = leitor.Nome;
+            TextBoxNome.Text = leitor.Nome;
+            DateTimePickerNasc.Value = leitor.Nascimento;
+            MaskedCpf.Text = leitor.Cpf;
+            TextBoxEmail.Text = leitor.Email;
+            MaskedTelefone.Text = leitor.Telefone;
+            ListBoxTipoLeitor.SelectedItem = leitor.Tipo;
         }
 
         private void PessoaForm_Load(object sender, EventArgs e)
@@ -92,6 +142,68 @@ namespace Biblioteca
             }
             MessageBox.Show("Pessoa cadastrada com sucesso!");
             Close();
+        }
+
+        private void buttonEditar_Click(object sender, EventArgs e)
+        {
+            if (PessoaTab.SelectedIndex == 0)
+            {
+                // atualiza os dados no objeto
+                leitor.Nome = TextBoxNome.Text;
+                leitor.Nascimento = DateTimePickerNasc.Value;
+                leitor.Cpf = MaskedCpf.Text;
+                leitor.Email = TextBoxEmail.Text;
+                leitor.Telefone = MaskedTelefone.Text;
+                leitor.Tipo = ListBoxTipoLeitor.SelectedItem.ToString();
+            }
+            else
+            {
+                // atualiza os dados no objeto
+                funcionario.Nome = TextBoxNome.Text;
+                funcionario.Nascimento = DateTimePickerNasc.Value;
+                funcionario.Cpf = MaskedCpf.Text;
+                funcionario.Email = TextBoxEmail.Text;
+                funcionario.Telefone = MaskedTelefone.Text;
+                funcionario.Cargo = (int)(EnumFuncionarioCargo)Enum.Parse(typeof(EnumFuncionarioCargo), ComboBoxCargo.Text);
+                funcionario.Salario = NumericSalario.Value;
+                funcionario.CargaHoraria = Convert.ToInt32(NumericCarga.Value);
+                funcionario.Funcao = TextBoxFuncao.Text;
+            }
+            MessageBox.Show("Pessoa editada com sucesso!");
+            Close();
+        }
+
+        private void buttonExcluir_Click(object sender, EventArgs e)
+        {
+            if (PessoaTab.SelectedIndex == 0)
+            {
+                // exclui o objeto
+                leitores.Remove(leitor);
+            }
+            else
+            {
+                // exclui o objeto
+                funcionarios.Remove(funcionario);
+            }
+            MessageBox.Show("Pessoa excluída com sucesso!");
+            Close();
+        }
+
+        private void PessoaTab_Selected(object sender, TabControlEventArgs e)
+        {
+
+        }
+
+        private void PessoaTab_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (edicaoFuncionario && e.TabPage != TabFuncionario)
+            {
+                e.Cancel = true;
+            }
+            else if (edicaoLeitor && e.TabPage != TabLeitor)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Biblioteca.ClassEnum;
 
 //AUGUSTO DOS SANTOS CORRÊA
 namespace Biblioteca
@@ -43,11 +44,11 @@ namespace Biblioteca
             exemplares.Add(new Livro("livro 3", "subtitulo3", "escritor3", "editora3", 2021, "genero3", 3, 132, "tipoCapa3", "isbn3"));
             exemplares.Add(new Livro("livro 4", "subtitulo4", "escritor4", "editora4", 2021, "genero4", 4, 234, "tipoCapa4", "isbn4"));
             exemplares.Add(new Livro("livro 5", "subtitulo5", "escritor5", "editora5", 2021, "genero5", 5, 432, "tipoCapa5", "isbn5"));
-            exemplares.Add(new Ebook("ebook 1", "subtitulo1", "escritor1", "editora1", 2021, "genero1", 1, "formato1", 1, "url1"));
-            exemplares.Add(new Ebook("ebook 2", "subtitulo2", "escritor2", "editora2", 2021, "genero2", 2, "formato2", 1, "url2"));
-            exemplares.Add(new Ebook("ebook 3", "subtitulo3", "escritor3", "editora3", 2021, "genero3", 3, "formato3", 1, "url3"));
-            exemplares.Add(new Ebook("ebook 4", "subtitulo4", "escritor4", "editora4", 2021, "genero4", 4, "formato4", 1, "url4"));
-            exemplares.Add(new Ebook("ebook 5", "subtitulo5", "escritor5", "editora5", 2021, "genero5", 5, "formato5", 1, "url5"));
+            exemplares.Add(new Ebook("ebook 1", "subtitulo1", "escritor1", "editora1", 2021, "genero1", 1, "formato1", 1, "url1", 100));
+            exemplares.Add(new Ebook("ebook 2", "subtitulo2", "escritor2", "editora2", 2021, "genero2", 2, "formato2", 1, "url2", 100));
+            exemplares.Add(new Ebook("ebook 3", "subtitulo3", "escritor3", "editora3", 2021, "genero3", 3, "formato3", 1, "url3", 100));
+            exemplares.Add(new Ebook("ebook 4", "subtitulo4", "escritor4", "editora4", 2021, "genero4", 4, "formato4", 1, "url4", 100));
+            exemplares.Add(new Ebook("ebook 5", "subtitulo5", "escritor5", "editora5", 2021, "genero5", 5, "formato5", 1, "url5", 100));
             exemplares.Add(new Revista("revista 1", "subtitulo1", "escritor1", "editora1", 2021, "genero1", 1, 324, 1));
             exemplares.Add(new Revista("revista 2", "subtitulo2", "escritor2", "editora2", 2021, "genero2", 2, 123, 1));
             exemplares.Add(new Revista("revista 3", "subtitulo3", "escritor3", "editora3", 2021, "genero3", 3, 654, 1));
@@ -94,7 +95,7 @@ namespace Biblioteca
 
         private void BibliotecaForm_Load(object sender, EventArgs e)
         {
-   
+
         }
 
         private void FormBiblioteca_Activated(object sender, EventArgs e)
@@ -104,6 +105,93 @@ namespace Biblioteca
             // também após fechar uma tela modal
             // atualiza a tela
             AtualizarDataGridView();
+        }
+
+        private void DataViewFuncionario_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+        private void DataViewFuncionario_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex == DataViewFuncionario.NewRowIndex || e.Value == null || string.IsNullOrWhiteSpace(e.Value.ToString()))
+                return;
+            string columnName = DataViewFuncionario.Columns[e.ColumnIndex].Name.ToLower();
+            string? valueStr = e.Value.ToString();
+            switch (columnName)
+            {
+                case "cargo":
+                    if (int.TryParse(valueStr, out int cargo))
+                        e.Value = ((EnumFuncionarioCargo)cargo).GetDescription();
+                    break;
+                case "cpf":
+                    if (valueStr!.Length == 11 && long.TryParse(valueStr, out long cpf))
+                        e.Value = string.Format(@"{0:000\.000\.000\-00}", cpf);
+                    break;
+                case "telefone":
+                    if (valueStr!.Length == 9 && long.TryParse(valueStr, out long telefone))
+                        e.Value = string.Format(@"{0:(00) 00000\-0000}", telefone);
+                    break;
+                case "salario":
+                    if (double.TryParse(valueStr, out double salario))
+                        e.Value = salario.ToString("N2");
+                    break;
+
+            }
+        }
+
+        private void DataViewFuncionario_DoubleClick(object sender, EventArgs e)
+        {
+            var funcionario = DataViewFuncionario.CurrentRow.DataBoundItem as Funcionario;
+
+            if (funcionario == null)
+            {
+                MessageBox.Show("Selecione um funcionário");
+                return;
+            }
+
+            //MessageBox.Show($"{funcionario.GetType().Name}, {funcionario.Nome}");
+
+            // abre a tela de edição de funcionário com o objeto selecionado
+            var form = new PessoaForm(funcionarios, funcionario);
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+        }
+
+        private void DataViewLeitores_DoubleClick(object sender, EventArgs e)
+        {
+            // armazena o objeto selecionado
+            var leitor = DataViewLeitores.CurrentRow.DataBoundItem as Leitor;
+            // validar se o objeto é nulo
+            if (leitor == null)
+            {
+                MessageBox.Show("Selecione um funcionário");
+                return;
+            }
+            //MessageBox.Show($"{leitor.GetType().Name}, {leitor.Nome}");
+
+            var form = new PessoaForm(leitores, leitor);
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+        }
+
+        private void DataViewExemplares_DoubleClick(object sender, EventArgs e)
+        {
+           
+            var exemplar = DataViewExemplares.CurrentRow.DataBoundItem as Exemplar;
+           
+            if (exemplar == null)
+            {
+                MessageBox.Show("Selecione um exemplar");
+                return;
+            }
+
+            //MessageBox.Show($"{exemplar.GetType().Name}, {exemplar.Titulo}");
+
+            var form = new ExemplarForm(exemplares, exemplar);
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
         }
     }
 }
