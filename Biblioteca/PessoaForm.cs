@@ -28,6 +28,9 @@ namespace Biblioteca
 
             this.funcionarios = funcionarios;
             this.leitores = leitores;
+
+            buttonEditar.Enabled = false;
+            buttonExcluir.Enabled = false;   
         }
 
         public PessoaForm(List<Funcionario> funcionarios, Funcionario funcionario)
@@ -119,6 +122,38 @@ namespace Biblioteca
             string auxCpf = MaskedCpf.Text;
             string auxEmail = TextBoxEmail.Text;
             string auxTelefone = MaskedTelefone.Text;
+            int idade = DateTime.Today.Year - auxData.Year;
+
+            if(string.IsNullOrWhiteSpace(auxNome))
+            {
+                MessageBox.Show("O campo Nome é obrigatório.");
+                return;
+            }
+            else if(auxData > DateTime.Today)
+            {
+                MessageBox.Show("A data de nascimento não pode ser futura ao dia de hoje.");
+                return;
+            }
+            else if(idade < 5)
+            {
+                MessageBox.Show("A idade deve ser superior a 5");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(auxCpf))
+            {
+                MessageBox.Show("O campo CPF É obrigatório.");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(auxEmail))
+            {
+                MessageBox.Show("O campo Rmail é obrigatório.");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(auxTelefone))
+            {
+                MessageBox.Show("O campo Telefone é obrigatório.");
+                return;
+            }
 
             if (PessoaTab.SelectedIndex == 0)
             {

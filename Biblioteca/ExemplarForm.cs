@@ -67,6 +67,7 @@ namespace Biblioteca
             Ebook ebook = exemplar as Ebook;
             if (ebook != null)
             {
+              
                 edicaoEbook = true;
                 TextBoxTitulo.Text = exemplar.Titulo;
                 TextBoxSubtitulo.Text = exemplar.Subtitulo;
@@ -114,6 +115,9 @@ namespace Biblioteca
             // carrega os valores do Enum para o combobox tipo do exemplar generico
             ListBoxGenerico.DataSource = Enum.GetValues(typeof(EnumGenericoTipo));
             ListBoxGenerico.SelectedIndex = 0;
+
+            buttonEditar.Enabled = false;
+            buttonExcluir.Enabled = false;
         }
 
         private void LabekTamanho_Click(object sender, EventArgs e)
@@ -157,6 +161,37 @@ namespace Biblioteca
             string auxGenero = ComboBoxGenero.Text;
             int auxStatus = (int)(EnumExemplarStatus)Enum.Parse(typeof(EnumExemplarStatus), ComboBoxStatus.Text);
 
+            if (string.IsNullOrWhiteSpace(auxTitulo))
+            {
+                MessageBox.Show("Titulo deve ser preenchido");
+                return;
+            }
+            else if(string.IsNullOrWhiteSpace(auxSubTitulo))
+            {
+                MessageBox.Show("Subtitulo deve ser preenchido");
+                return;
+            }
+            else if(string.IsNullOrWhiteSpace(auxEscritor))
+            {
+                MessageBox.Show("Escritor deve ser informado");
+                return;
+            }
+            else if(string.IsNullOrWhiteSpace(auxEditora))
+            {
+                MessageBox.Show("editora deve ser preenchida");
+                return;
+            }
+            else if (auxAnoPublicacao > DateTime.Today.Year)
+            {
+                MessageBox.Show("A data de publicação não pode ser futura ao ano atual.");
+                return;
+            }
+            else if(string.IsNullOrWhiteSpace(auxGenero))
+            {
+                MessageBox.Show("Genero deve ser informado.");
+                return;
+            }
+     
             if (tabControlExemplar.SelectedIndex == 0)
             {
                 // livro e ebook
@@ -164,6 +199,24 @@ namespace Biblioteca
                 int auxPaginas = Convert.ToInt32(numericUpDownPaginasLivro.Value);
                 string auxTipoCapa = ComboBoxCapa.Text;
                 string auxIsbn = TextBoxIsbn.Text;
+
+                if(string.IsNullOrWhiteSpace(auxTipoCapa))
+                {
+                    MessageBox.Show("Tipo da capa deve ser informado");
+                    return;
+                }
+                else if(auxPaginas <= 20)
+                {
+                    MessageBox.Show("Deve ter mais de 20 paginas");
+                    return;
+                }
+                else if(string.IsNullOrWhiteSpace(auxIsbn))
+                {
+                    MessageBox.Show("ISBN deve ser informado");
+                    return;
+                }
+            
+
                 if (!CheckBoxEbook.Checked)
                 {
                     // livro
@@ -175,11 +228,27 @@ namespace Biblioteca
                     // ebook
                     // leitura dos valores dos campos
                     string auxFormato = ComboBoxFormato.Text;
-                    decimal auxTamanho = NumericTam.Value;
+                    decimal auxTamanho = Convert.ToInt32(NumericTam.Value);
                     string auxUrl = TextBoxUrl.Text;
                     int AuxPaginas = (int)numericUpDownPaginasLivro.Value;
-                    // cria o objeto e já adiciona no List
-                    exemplares.Add(new Ebook(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxFormato, auxTamanho, auxUrl, AuxPaginas));
+                    
+                    if(string.IsNullOrWhiteSpace(auxFormato))
+                    {
+                        MessageBox.Show("Formato deve ser preenchido");
+                        return;
+                    }
+                    else if(auxTamanho < 0)
+                    {
+                        MessageBox.Show("Tamanho deve ser maior que 0");
+                        return;
+                    }
+                    else if(string.IsNullOrWhiteSpace(auxUrl))
+                    {
+                        MessageBox.Show("URL deve ser preenchida");
+                        return;
+                    }
+
+                        exemplares.Add(new Ebook(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxFormato, auxTamanho, auxUrl, AuxPaginas));
                 }
             }
             else if (tabControlExemplar.SelectedIndex == 1)
@@ -188,8 +257,19 @@ namespace Biblioteca
                 // leitura dos valores dos campos
                 int auxEdicaoRevista = Convert.ToInt32(NumericEdicao.Value);
                 int auxPaginasRevista = Convert.ToInt32(NumericNumPaginas.Value);
-                // cria o objeto e já adiciona no List
-                exemplares.Add(new Revista(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxEdicaoRevista, auxPaginasRevista));
+
+                if(auxEdicaoRevista < 0)
+                {
+                    MessageBox.Show("Edição da revista deve ser maior que 0");
+                    return;
+                }
+                else if(auxPaginasRevista < 0)
+                {
+                    MessageBox.Show("Revista deve ter mais de uma página");
+                    return;
+                }
+                    // cria o objeto e já adiciona no List
+                    exemplares.Add(new Revista(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxEdicaoRevista, auxPaginasRevista));
             }
             else if (tabControlExemplar.SelectedIndex == 2)
             {
@@ -197,14 +277,30 @@ namespace Biblioteca
                 // leitura dos valores dos campos
                 int auxEdicaoHq = Convert.ToInt32(NumericNumEdicao.Value);
                 string auxIlustrador = TextBoxIlustrador.Text;
-                // cria o objeto e já adiciona no List
-                exemplares.Add(new Hq(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxEdicaoHq, auxIlustrador));
+
+                if(auxEdicaoHq < 0)
+                {
+                    MessageBox.Show("Edição deve ser maior que 0");
+                }
+                else if(string.IsNullOrWhiteSpace(auxIlustrador))
+                {
+                    MessageBox.Show("Campo Ilustrador deve ser preenchido");
+                    return;
+                }
+                    // cria o objeto e já adiciona no List
+                    exemplares.Add(new Hq(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxEdicaoHq, auxIlustrador));
             }
             else if (tabControlExemplar.SelectedIndex == 3)
             {
                 // generico
                 // leitura dos valores dos campos
                 int auxTipo = (int)(EnumGenericoTipo)Enum.Parse(typeof(EnumGenericoTipo), ListBoxGenerico.Text);
+
+                if(auxTipo < 0)
+                {
+                    MessageBox.Show("Tipo deve ser preenchido");
+                    return;
+                }
                 // cria o objeto e já adiciona no List
                 exemplares.Add(new Generico(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxTipo));
             }
