@@ -139,6 +139,11 @@ namespace Biblioteca
                 MessageBox.Show("A idade deve ser superior a 5");
                 return;
             }
+            else if(funcionarios.Any(f => f.Cpf == auxCpf) || leitores.Any(l => l.Cpf == auxCpf))
+            {
+                MessageBox.Show("CPF ja foi cadastrado");
+                return;
+            } 
             else if (string.IsNullOrWhiteSpace(auxCpf))
             {
                 MessageBox.Show("O campo CPF É obrigatório.");

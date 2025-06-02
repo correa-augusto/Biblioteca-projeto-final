@@ -166,17 +166,22 @@ namespace Biblioteca
                 MessageBox.Show("Titulo deve ser preenchido");
                 return;
             }
-            else if(string.IsNullOrWhiteSpace(auxSubTitulo))
+            else if(exemplares.Any(e => e.Titulo == auxTitulo))
+            {
+                MessageBox.Show("Ja existe um exemplar com esse titulo");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(auxSubTitulo))
             {
                 MessageBox.Show("Subtitulo deve ser preenchido");
                 return;
             }
-            else if(string.IsNullOrWhiteSpace(auxEscritor))
+            else if (string.IsNullOrWhiteSpace(auxEscritor))
             {
                 MessageBox.Show("Escritor deve ser informado");
                 return;
             }
-            else if(string.IsNullOrWhiteSpace(auxEditora))
+            else if (string.IsNullOrWhiteSpace(auxEditora))
             {
                 MessageBox.Show("editora deve ser preenchida");
                 return;
@@ -186,7 +191,7 @@ namespace Biblioteca
                 MessageBox.Show("A data de publicação não pode ser futura ao ano atual.");
                 return;
             }
-            else if(string.IsNullOrWhiteSpace(auxGenero))
+            else if (string.IsNullOrWhiteSpace(auxGenero))
             {
                 MessageBox.Show("Genero deve ser informado.");
                 return;
@@ -215,7 +220,8 @@ namespace Biblioteca
                     MessageBox.Show("ISBN deve ser informado");
                     return;
                 }
-            
+           
+
 
                 if (!CheckBoxEbook.Checked)
                 {
@@ -231,24 +237,24 @@ namespace Biblioteca
                     decimal auxTamanho = Convert.ToInt32(NumericTam.Value);
                     string auxUrl = TextBoxUrl.Text;
                     int AuxPaginas = (int)numericUpDownPaginasLivro.Value;
-                    
-                    if(string.IsNullOrWhiteSpace(auxFormato))
+
+                    if (string.IsNullOrWhiteSpace(auxFormato))
                     {
                         MessageBox.Show("Formato deve ser preenchido");
                         return;
                     }
-                    else if(auxTamanho < 0)
+                    else if (auxTamanho < 0)
                     {
                         MessageBox.Show("Tamanho deve ser maior que 0");
                         return;
                     }
-                    else if(string.IsNullOrWhiteSpace(auxUrl))
+                    else if (string.IsNullOrWhiteSpace(auxUrl))
                     {
                         MessageBox.Show("URL deve ser preenchida");
                         return;
                     }
 
-                        exemplares.Add(new Ebook(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxFormato, auxTamanho, auxUrl, AuxPaginas));
+                    exemplares.Add(new Ebook(auxTitulo, auxSubTitulo, auxEscritor, auxEditora, auxAnoPublicacao, auxGenero, auxStatus, auxFormato, auxTamanho, auxUrl, AuxPaginas));
                 }
             }
             else if (tabControlExemplar.SelectedIndex == 1)
