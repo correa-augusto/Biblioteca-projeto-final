@@ -27,6 +27,9 @@ namespace Biblioteca
         {
             InitializeComponent();
             this.exemplares = exemplares;
+
+            buttonEditar.Enabled = false;
+            buttonExcluir.Enabled = false;
         }
 
         // sobrecarga de construtor, novo construtor com lista de parâmetros diferente
@@ -115,9 +118,6 @@ namespace Biblioteca
             // carrega os valores do Enum para o combobox tipo do exemplar generico
             ListBoxGenerico.DataSource = Enum.GetValues(typeof(EnumGenericoTipo));
             ListBoxGenerico.SelectedIndex = 0;
-
-            buttonEditar.Enabled = false;
-            buttonExcluir.Enabled = false;
         }
 
         private void LabekTamanho_Click(object sender, EventArgs e)
